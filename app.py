@@ -2,8 +2,16 @@ import os
 import streamlit as st
 from sqlalchemy import create_engine, text
 
-# Secure connection: Databricks provides this environment variable automatically
-DATABASE_URL = os.environ.get("LAKEBASE_DATABASE_URL", "postgresql://user:pass@localhost:5432/db")
+# Secure connection: Build connection URL from individual environment variables
+# These need to be set in your app configuration
+DB_HOST = os.environ.get("LAKEBASE_HOST", "localhost")
+DB_PORT = os.environ.get("LAKEBASE_PORT", "5432")
+DB_NAME = os.environ.get("LAKEBASE_DATABASE", "databricks-postgres")
+DB_USER = os.environ.get("LAKEBASE_USER", "user")
+DB_PASSWORD = os.environ.get("LAKEBASE_PASSWORD", "password")
+
+# Construct the connection URL
+DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?sslmode=require"
 engine = create_engine(DATABASE_URL)
 
 st.set_page_config(page_title="SyncMetrics Support Core", layout="wide")
