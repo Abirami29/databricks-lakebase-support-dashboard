@@ -1,20 +1,20 @@
-import os
+import base64
 import streamlit as st
 from sqlalchemy import create_engine, text
 from databricks.sdk import WorkspaceClient
 
 st.set_page_config(page_title="SyncMetrics Support Core", layout="wide")
 
-# Read connection details from environment variables
-# Secrets from resources are injected with the resource name (with hyphens)
-DB_HOST = os.environ.get("lakebase-host", "localhost")
-DB_PASSWORD = os.environ.get("lakebase-password", "password")
-DB_PORT = os.environ.get("LAKEBASE_PORT", "5432")
-DB_NAME = os.environ.get("LAKEBASE_DATABASE", "databricks_postgres")
-DB_USER = os.environ.get("LAKEBASE_USER", "ticket-app-role")
+_w = WorkspaceClient()
+_SCOPE = "lakebase-secrets"
+_KEY = "lakebase-host"
 
-# Construct the connection URL
-DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?sslmode=require"
+def _lakebase_url() -> str:
+    """Fetch and decode the Lakebase connection URL from the Databricks secret scope."""
+    secret = _w.secrets.get_secret(scope=_SCOPE, key=_KEY)
+    return base64.b64decode(secret.value).decode("utf-8")
+
+DATABASE_URL = _lakebase_url()
 engine = create_engine(DATABASE_URL)
 st.title("🛠️ SyncMetrics Internal Support Dashboard")
 
