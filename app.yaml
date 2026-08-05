@@ -4,8 +4,13 @@ command:
   - streamlit run app.py --server.port $PORT
 
 env:
-  LAKEBASE_HOST: "${secrets/lakebase-secrets/lakebase-host}"
-  LAKEBASE_PORT: "5432"
-  LAKEBASE_DATABASE: databricks_postgres
-  LAKEBASE_USER: ticket-app-role
-  LAKEBASE_PASSWORD: "${secrets/lakebase-secrets/lakebase-password}"
+  - name: LAKEBASE_HOST
+    value: "${secrets/lakebase-secrets/lakebase-host}"
+  - name: LAKEBASE_PORT
+    value: "5432"
+  - name: LAKEBASE_DATABASE
+    value: databricks_postgres
+  - name: LAKEBASE_USER
+    value: ticket-app-role
+  - name: LAKEBASE_PASSWORD
+    value: "${secrets/lakebase-secrets/lakebase-password}"
