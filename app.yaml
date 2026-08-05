@@ -12,7 +12,7 @@ env:
   - name: LAKEBASE_PORT
     value: "5432"
   - name: LAKEBASE_DATABASE
-    value: databricks_postgres
+    value: "databricks_postgres"
   - name: LAKEBASE_USER
     value: "ticket-app-role"
   - name: LAKEBASE_PASSWORD
