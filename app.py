@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 from sqlalchemy import create_engine, text
+from databricks.sdk import WorkspaceClient
 
 st.set_page_config(page_title="SyncMetrics Support Core", layout="wide")
 
