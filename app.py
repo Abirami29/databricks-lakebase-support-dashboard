@@ -2,16 +2,27 @@ import os
 import streamlit as st
 from sqlalchemy import create_engine, text
 
+# DEBUG: Print all environment variables to see what's available
+st.write("### Debug: Environment Variables")
+st.write(f"Available env vars containing 'lakebase': {[k for k in os.environ.keys() if 'lakebase' in k.lower()]}")
+st.write(f"lakebase-host: {os.environ.get('lakebase-host', 'NOT FOUND')}")
+st.write(f"lakebase-password: {'***' if os.environ.get('lakebase-password') else 'NOT FOUND'}")
+st.write(f"LAKEBASE_HOST: {os.environ.get('LAKEBASE_HOST', 'NOT FOUND')}")
+st.write("---")
+
 # Secure connection: Read secrets from Databricks Apps resources
-# Secrets registered as resources are automatically injected as environment variables
-# using the resource name (e.g., "lakebase-host", "lakebase-password")
-DB_HOST = os.environ.get("lakebase-host", "localhost")
-DB_PASSWORD = os.environ.get("lakebase-password", "password")
+DB_HOST = os.environ.get("lakebase-host", os.environ.get("LAKEBASE_HOST", "localhost"))
+DB_PASSWORD = os.environ.get("lakebase-password", os.environ.get("LAKEBASE_PASSWORD", "password"))
 
 # Static configuration
 DB_PORT = "5432"
 DB_NAME = "databricks_postgres"
 DB_USER = "ticket-app-role"
+
+st.write(f"Connecting to: {DB_HOST}")
+st.write(f"Database: {DB_NAME}")
+st.write(f"User: {DB_USER}")
+st.write("---")
 
 # Construct the connection URL
 DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?sslmode=require"
