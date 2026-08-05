@@ -5,11 +5,12 @@ from sqlalchemy import create_engine, text
 st.set_page_config(page_title="SyncMetrics Support Core", layout="wide")
 
 # Read connection details from environment variables
-DB_HOST = os.environ.get("LAKEBASE_HOST", "localhost")
+# Secrets from resources are injected with the resource name (with hyphens)
+DB_HOST = os.environ.get("lakebase-host", "localhost")
+DB_PASSWORD = os.environ.get("lakebase-password", "password")
 DB_PORT = os.environ.get("LAKEBASE_PORT", "5432")
 DB_NAME = os.environ.get("LAKEBASE_DATABASE", "databricks_postgres")
 DB_USER = os.environ.get("LAKEBASE_USER", "ticket-app-role")
-DB_PASSWORD = os.environ.get("LAKEBASE_PASSWORD", "password")
 
 # Construct the connection URL
 DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?sslmode=require"

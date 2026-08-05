@@ -3,14 +3,22 @@ command:
   - -c
   - streamlit run app.py --server.port $PORT
 
+resources:
+  - name: lakebase-host
+    secret:
+      scope: lakebase-secrets
+      key: lakebase-host
+      permission: READ
+  - name: lakebase-password
+    secret:
+      scope: lakebase-secrets
+      key: lakebase-password
+      permission: READ
+
 env:
-  - name: LAKEBASE_HOST
-    value: "${secrets/lakebase-secrets/lakebase-host}"
   - name: LAKEBASE_PORT
     value: "5432"
   - name: LAKEBASE_DATABASE
     value: databricks_postgres
   - name: LAKEBASE_USER
     value: ticket-app-role
-  - name: LAKEBASE_PASSWORD
-    value: "${secrets/lakebase-secrets/lakebase-password}"
