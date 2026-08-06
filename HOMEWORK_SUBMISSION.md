@@ -18,12 +18,21 @@ https://github.com/Abirami29/databricks-lakebase-app-day-1-homework.git
 ## Application Screenshots
 
 ### Version 1 (Initial Implementation)
-![V1 Screenshot](./screenshots/v1-initial.png)
+
+
+<img width="468" height="276" alt="image" src="https://github.com/user-attachments/assets/c3612527-ebc8-4e56-a4fc-7bec49a53cf1" />
+<img width="468" height="266" alt="image" src="https://github.com/user-attachments/assets/65bd5eb2-db98-4cee-b5a4-16cb9dc3a86c" />
+
 *Initial deployment of the SyncMetrics Internal Support Dashboard*
 
 ### Version 2 (Improved Visual Display)
-![V2 Screenshot - Part 1](./screenshots/v2-improved-1.png)
-![V2 Screenshot - Part 2](./screenshots/v2-improved-2.png)
+
+
+<img width="468" height="276" alt="image" src="https://github.com/user-attachments/assets/1dcc5a7f-f9de-4bfd-8ce1-d35146e77167" />
+<img width="468" height="256" alt="image" src="https://github.com/user-attachments/assets/5cd9c8e9-4f1e-449c-80d6-50bc3020a1db" />
+
+
+
 *Enhanced visual design and user interface improvements*
 
 ---
@@ -31,13 +40,21 @@ https://github.com/Abirami29/databricks-lakebase-app-day-1-homework.git
 ## Database Schema
 
 ### Tables Created
-![Tables Overview](./screenshots/tables-overview.png)
 
-#### Tickets Table
-![Tickets Table](./screenshots/table-tickets.png)
 
-#### Ticket Messages Table
-![Ticket Messages Table](./screenshots/table-messages.png)
+<img width="468" height="239" alt="image" src="https://github.com/user-attachments/assets/25143cb2-b83e-48f7-a127-8166315ab52a" />
+<img width="468" height="225" alt="image" src="https://github.com/user-attachments/assets/3f595e6c-4405-4854-a49a-248a75e0bc89" />
+
+
+#### Tickets Table Data
+
+<img width="468" height="210" alt="image" src="https://github.com/user-attachments/assets/116c6ea5-ae87-4928-95b4-fa469f1c9f01" />
+
+
+#### Ticket Messages Table Data
+
+<img width="468" height="187" alt="image" src="https://github.com/user-attachments/assets/5af1db64-93e6-4a21-836e-b93a4a1cb795" />
+
 
 ---
 
