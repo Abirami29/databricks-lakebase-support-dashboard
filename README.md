@@ -75,10 +75,10 @@ CREATE TABLE ticket_messages (
 
 1. Create a Lakebase Postgres project and branch in your Databricks workspace
 2. Note your connection details from the Lakebase UI:
-   * Hostname (e.g., `ep-xxxxx.database.us-east-2.cloud.databricks.com`)
+   * Hostname (e.g., `postgresql://user-name:password@ep-xxxxx.database.us-east-2.cloud.databricks.com/databricks_postgres?sslmode=require`)
    * Port: `5432`
    * Database: `databricks_postgres`
-   * User: Your email address
+   * User: user-name created in Lakebase
    * Password: Generated password
 
 3. Create the database schema using the SQL commands above
@@ -91,25 +91,25 @@ Create a secret scope and add your Lakebase credentials:
 # Create the secret scope (one-time setup)
 databricks secrets create-scope lakebase-secrets
 
-# Add the Lakebase hostname (JUST THE HOSTNAME, not the full URL)
+# Add the Lakebase hostname (the full URL)
 databricks secrets put-secret lakebase-secrets lakebase-host \
-  --string-value "ep-xxxxx.database.us-east-2.cloud.databricks.com"
+  --string-value "postgresql://user-name:password@ep-xxxxx.database.us-east-2.cloud.databricks.com/databricks_postgres?sslmode=require"
 
 # Add the Lakebase password
 databricks secrets put-secret lakebase-secrets lakebase-password \
   --string-value "your-password-here"
 ```
 
-**⚠️ IMPORTANT**: The `lakebase-host` secret must contain **ONLY the hostname**, not the full PostgreSQL URL!
+**⚠️ IMPORTANT**: The `lakebase-host` secret must contain **full URL**, not just the hostname!
 
 ✅ Correct:
 ```
-ep-hidden-bread-d83qxt8s.database.us-east-2.cloud.databricks.com
+postgresql://user-name:password@ep-xxxxx.database.us-east-2.cloud.databricks.com/databricks_postgres?sslmode=require
 ```
 
 ❌ Wrong:
 ```
-postgresql://user@host/db?sslmode=require
+ep-xxxxx.database.us-east-2.cloud.databricks.com
 ```
 
 ### Step 3: Configure app.yaml
@@ -223,9 +223,9 @@ env:
 * **Solution**: Validate YAML format, ensure consistent spacing (2 spaces)
 
 #### 2. Database Connection Failed
-* **Cause**: Incorrect secret values or wrong hostname format
+* **Cause**: Incorrect secret values
 * **Solution**: 
-  * Verify `lakebase-host` contains ONLY the hostname
+  * Verify `lakebase-host` contains the whole URL
   * Check that `lakebase-password` is correct
   * Ensure `LAKEBASE_USER` matches your Lakebase user
 
@@ -260,9 +260,9 @@ try:
     
     # Verify hostname format
     if host.startswith("postgresql://"):
-        print("❌ ERROR: lakebase-host contains a full URL, not just the hostname!")
-    else:
         print("✅ Host format looks correct")
+    else:  
+        print("❌ ERROR: lakebase-host must contain a full URL, not just the hostname!")
 except Exception as e:
     print(f"❌ Error: {e}")
 ```
