@@ -1,6 +1,23 @@
 # 🛠️ SyncMetrics Support Dashboard
 
-A modern, feature-rich internal support ticketing system built with Streamlit and Databricks Lakebase (Postgres). This application provides a beautiful, intuitive interface for managing customer support tickets with real-time collaboration.
+## Project Overview
+
+**SyncMetrics** is a comprehensive health metrics synchronization platform designed to aggregate and manage all health-related data in one unified system. This Support Dashboard serves as the **operational backbone** for managing user support and system health inquiries.
+
+### Part of SyncMetrics Ecosystem
+
+This application is part of a larger **SyncMetrics Data Platform** that will eventually sync and integrate:
+
+- 🏃 **Fitness Wearables Data** - Apple Watch, Fitbit, Garmin, Oura Ring metrics
+- 📊 **Gym Schedules & Workout Details** - Exercise logs, performance tracking, workout history
+- 🍎 **Diet Information** - Nutrition tracking, meal plans, calorie counts
+- ❤️ **Health Metrics** - Heart rate, sleep patterns, steps, calories burned
+- 📈 **Analytics & Trends** - Personalized health insights and goal tracking
+- 💬 **Support & Collaboration** - This dashboard for managing user inquiries and support tickets
+
+### Current Release
+
+This release focuses on the **Support Ticketing System** - a modern, feature-rich internal support dashboard built with Streamlit and Databricks Lakebase (Postgres). It provides a beautiful, intuitive interface for managing customer support tickets with real-time collaboration and serves as a foundation for the SyncMetrics ecosystem.
 
 ![Dashboard Overview](https://img.shields.io/badge/Status-Production_Ready-success)
 ![Platform](https://img.shields.io/badge/Platform-Databricks_Apps-blue)
