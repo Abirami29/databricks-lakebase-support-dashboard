@@ -22,3 +22,4 @@ env:
     value: databricks_postgres
   - name: LAKEBASE_USER
     value: ticket-app-role
+    
