@@ -33,6 +33,61 @@ A modern, feature-rich internal support ticketing system built with Streamlit an
 
 ## 🏗️ Architecture
 
+### System Architecture Overview
+
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃           🎨 USER INTERFACE (Streamlit Web App)           ┃
+┃  ┌─────────────────────────────────────────────────────┐ ┃
+┃  │  📊 Dashboard Metrics │ 📋 Left Panel │ 💬 Right    │ ┃
+┃  │  Real-time Stats      │ Ticket List   │ Ticket      │ ┃
+┃  │  (4 metric cards)     │ & Creation    │ Details     │ ┃
+┃  └─────────────────────────────────────────────────────┘ ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+                            ▲
+                            │ Streamlit Events
+                            │ (User clicks, forms)
+                            ▼
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃      🐍 APPLICATION LOGIC (Python in app.py)             ┃
+┃  ✓ Input validation      ✓ State management              ┃
+┃  ✓ Query building        ✓ Error handling                ┃
+┃  ✓ Data transformation   ✓ UI rendering                  ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+                            ▲
+                            │ SQLAlchemy ORM
+                            │ (Query execution)
+                            ▼
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃      🔐 DATABRICKS SECRETS API (Secret Scope Mgmt)       ┃
+┃  • Scope: lakebase-secrets                               ┃
+┃  • Key 1: lakebase-host (connection URL)                 ┃
+┃  • Key 2: lakebase-password (base64 encoded)             ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+                            ▲
+                            │ Base64 decode
+                            │ & authenticate
+                            ▼
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃    💾 DATABRICKS LAKEBASE (PostgreSQL-Compatible DB)     ┃
+┃  ┌────────────────────┐  ┌──────────────────────────┐  ┃
+┃  │  📌 TICKETS TABLE  │  │ 💬 TICKET_MESSAGES TABLE │  ┃
+┃  ├────────────────────┤  ├──────────────────────────┤  ┃
+┃  │ • ticket_id (PK)   │  │ • message_id (PK)        │  ┃
+┃  │ • title            │  │ • ticket_id (FK)         │  ┃
+┃  │ • status           │  │ • message_text           │  ┃
+┃  │ • created_by       │  │ • author                 │  ┃
+┃  │ • created_at       │  │ • created_at             │  ┃
+┃  └────────────────────┘  └──────────────────────────┘  ┃
+┃                                                         ┃
+┃  📊 Row-based storage optimized for OLTP               ┃
+┃  🔒 ACID compliance & concurrent access                ┃
+┃  ⚡ Low-latency reads/writes                           ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+```
+
+**📖 For detailed data flows, user interactions, and system diagrams, see [FLOW_DIAGRAM.md](./FLOW_DIAGRAM.md)**
+
 ### Tech Stack
 * **Frontend**: Streamlit with custom CSS
 * **Backend**: Databricks Lakebase Postgres (autoscaling)
