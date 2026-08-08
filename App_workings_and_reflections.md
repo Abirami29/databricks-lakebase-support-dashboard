@@ -10,9 +10,6 @@ This is a Streamlit-based ticket management application built on Databricks Lake
 ### Databricks App URL
 https://ticketing-app-7474643870010414.aws.databricksapps.com/
 
-### Source Code Repository
-https://github.com/Abirami29/databricks-lakebase-app-day-1-homework.git
-
 ---
 
 ## Application Screenshots
