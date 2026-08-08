@@ -7,7 +7,7 @@ This is a Streamlit-based ticket management application built on Databricks Lake
 
 ## Deployment & Source Code
 
-### Databricks App URL
+### Databricks App URL -- Note: This URL is only accessible when the Databricks workspace is running. If you are deploying a new instance, make sure your Databricks app is deployed and running and use the URL generated for you
 https://ticketing-app-7474643870010414.aws.databricksapps.com/
 
 ---
